@@ -20,8 +20,10 @@
 
 #### Решение
 1. Найдите полный хеш и комментарий коммита, хеш которого начинается на `aefea`.
+
 ```sh
-alex@Makar:~/Documents/terraform$ git show aefea
+git show aefea
+
 commit aefead2207ef7e2aa5dc81a34aedf0cad4c32545
 Author: Alisdair McDiarmid <alisdair@users.noreply.github.com>
 Date:   Thu Jun 18 10:29:58 2020 -0400
@@ -30,19 +32,27 @@ Date:   Thu Jun 18 10:29:58 2020 -0400
 ```
 
 2. Какому тегу соответствует коммит `85024d3`
+
 ```sh
-alex@Makar:~/Documents/terraform$ git show 85024d3
+git show 85024d3
+
 commit 85024d3100126de36331c6982bfaac02cdab9e76 (tag: v0.12.23)
 ```
+
 Сколько родителей у коммита `b8d720`? Напишите их хеши.
+
 ```sh
-alex@Makar:~/Documents/terraform$ git log b8d720
+git log b8d720
+
 commit b8d720f8340221f2146e4e4870bf2ee0bc48f2d5
 Merge: 56cd7859e0 9ea88f22fc
 ```
+
 Перечислите хеши и комментарии всех коммитов, которые были сделаны между тегами v0.12.23 и v0.12.24.
+
 ```sh
-alex@Makar:~/Documents/terraform$ git log v0.12.23..v0.12.24 --oneline
+git log v0.12.23..v0.12.24 --oneline
+
 33ff1c03bb (tag: v0.12.24) v0.12.24
 b14b74c493 [Website] vmc provider links
 3f235065b9 Update CHANGELOG.md
@@ -54,22 +64,30 @@ d5f9411f51 command: Fix bug when using terraform login on Windows
 dd01a35078 Update CHANGELOG.md
 225466bc3e Cleanup after v0.12.23 release
 ```
+
 Найдите коммит, в котором была создана функция `func providerSource`, её определение в коде выглядит так: `func providerSource(...)` (вместо троеточия перечислены аргументы).
+
 ```sh
-alex@Makar:~/Documents/terraform$ git log -S"func providerSource(" --oneline
+git log -S"func providerSource(" --oneline
+
 8c928e8358 main: Consult local directories as potential mirrors of providers
 ```
+
 Найдите все коммиты, в которых была изменена функция `globalPluginDirs`.
+
 ```sh
-alex@Makar:~/Documents/terraform$ git grep globalPluginDirs
+git grep globalPluginDirs
+
 commands.go:            GlobalPluginDirs: globalPluginDirs(),
 commands.go:    helperPlugins := pluginDiscovery.FindPlugins("credentials", globalPluginDirs())
 internal/command/cliconfig/config_unix.go:              // FIXME: homeDir gets called from globalPluginDirs during init, before
 plugins.go:// globalPluginDirs returns directories that should be searched for
 plugins.go:func globalPluginDirs() []string {
 ```
+
 ```sh
-alex@Makar:~/Documents/terraform$ git log -L :globalPluginDirs:plugins.go --oneline --minimal
+git log -L :globalPluginDirs:plugins.go --oneline --minimal
+
 78b1220558 Remove config.go and update things using its aliases
 
 diff --git a/plugins.go b/plugins.go
@@ -188,10 +206,13 @@ diff --git a/plugins.go b/plugins.go
 +       return ret
 +}
 ```
+
 Кто автор функции `synchronizedWriters`?  
-Author: Martin Atkins <mart@degeneration.co.uk>q
+Author: Martin Atkins <mart@degeneration.co.uk>
+
 ```sh
-alex@Makar:~/Documents/terraform$ git log -S"func synchronizedWriters("
+git log -S"func synchronizedWriters("
+
 commit bdfea50cc85161dea41be0fe3381fd98731ff786
 Author: James Bardin <j.bardin@gmail.com>
 Date:   Mon Nov 30 18:02:04 2020 -0500
